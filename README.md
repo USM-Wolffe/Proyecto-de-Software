@@ -6,7 +6,7 @@ Integrantes:
 - Fernanda Ojeda - 202273025-0
 - Sebastian Reyes -202273105-2
 
-##Wiki
+## Wiki
 
 Puede acceder a la wiki del repositorio mediante el siguient enlace [enlace](https://gitlab.com/grupo4-2024-proyinf/GRUPO4-2024-PROYINF/-/wikis/Wiki)
     
