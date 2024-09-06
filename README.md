@@ -2,9 +2,9 @@
 
 Integrantes:
 - Badir Villegas - 202273020-K
-- Benjamin Reyes - 
-- Fernanda Ojeda - 
-- Sebastian Reyes - 
+- Benjamin Reyes - 202273053-6
+- Fernanda Ojeda - 202273025-0
+- Sebastian Reyes -202273105-2
 
 Url a la wiki del repositorio [enlace](https://gitlab.com/grupo4-2024-proyinf/GRUPO4-2024-PROYINF/-/wikis/Wiki)
     
