@@ -1,7 +1,7 @@
-    =*Repositorio grupo 4*=
+        =*Repositorio grupo 4*=
 
 Integrantes:
-- Badir V. - 202273020-K
+- Badir Villegas - 202273020-K
 - Benjamin Reyes - 
 - Fernanda Ojeda - 
 - Sebastian Reyes - 
