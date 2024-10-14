@@ -1,7 +1,32 @@
 body {
-    background-color: #22af2b;
     font-family: Arial, sans-serif;
+    color: #d52121;
 }
-h1{
-    color: #333;
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 45vh;
 }
+
+.boton-trabajador {
+    font-size: 25px;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    display: inline-block; /* Permite aplicar padding y márgenes */
+    padding: 15px 25px; /* Espaciado interno */
+    color: rgb(255, 255, 255); /* Color del texto */
+    text-align: center; /* Centrar texto */
+    text-decoration: none; /* Quitar subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Efecto suave para el cambio de color */
+    margin: 15px 0; /*margen vertical*/
+    background-image: linear-gradient(to right, #3f28a7, #1b124f);
+
+}
+.boton-trabajador:hover {  /*Cuando se pasa el mouse por encima*/
+    background-image: linear-gradient(to right, #34b556, #56c150);
+    background-color: #0056b3;
+}
+
