@@ -7,3 +7,6 @@ def index(request):
 
 def trabajador(request):
     return render(request, "MainApp/trabajador.html")
+
+def contador(request):
+    return render(request, "MainApp/contador.html")
