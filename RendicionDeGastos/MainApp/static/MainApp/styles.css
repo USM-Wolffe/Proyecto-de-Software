@@ -1,32 +1,59 @@
-body {
-    font-family: Arial, sans-serif;
-    color: #d52121;
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
 }
 
-.botones {
+body{
+    background-color: #FCD7AD;
+}
+
+.header{
+    background-color: #5296A5;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    height: 45vh;
+    height: 85px;
+    padding: 5px 10%;
 }
 
-.boton-trabajador {
-    font-size: 25px;
-    font-family: 'Trebuchet MS', Arial, sans-serif;
-    display: inline-block; /* Permite aplicar padding y márgenes */
-    padding: 15px 25px; /* Espaciado interno */
-    color: rgb(255, 255, 255); /* Color del texto */
-    text-align: center; /* Centrar texto */
-    text-decoration: none; /* Quitar subrayado */
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s; /* Efecto suave para el cambio de color */
-    margin: 15px 0; /*margen vertical*/
-    background-image: linear-gradient(to right, #3f28a7, #1b124f);
-
-}
-.boton-trabajador:hover {  /*Cuando se pasa el mouse por encima*/
-    background-image: linear-gradient(to right, #34b556, #56c150);
-    background-color: #0056b3;
+.header .nav-links{
+    list-style: none;
+    display: flex;
 }
 
+.header .inicio{
+    margin-right: auto;
+}
+
+.header .nav-links li{
+    display: inline-block;
+    padding: 0 20px;
+}
+
+.header .nav-links li:hover{
+    transform: scale(1.01);
+}
+
+.header .nav-links a{
+    font-size: 2000;
+    color: #32161f;
+    text-decoration: none;
+}
+
+.header .nav-links li a:hover{
+    color: azure;
+
+}
+
+.header .btn button{   /*boton derecho*/
+    font-weight: 700;
+    padding: 9px 25px;
+    background-color: aqua;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
