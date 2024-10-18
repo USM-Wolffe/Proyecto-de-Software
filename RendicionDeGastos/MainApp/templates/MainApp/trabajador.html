@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ES">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +7,28 @@
     <link rel="stylesheet" href="{% static 'MainApp/styles.css' %}">
     <title>Trabajador</title>
 </head>
-
 <body>
+
+    <!-- Header -->
     <header class="header">
         <div class="logo">
+            <a href="{% url 'index' %}">INICIO</a>
         </div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Usuario</a></li>
-                <li><a href="#">Perfil</a></li>
-            </ul>
-        </nav>
-        <a href="#" class="btn"><button>Contact</button></a>
+        <ul class="nav-links">
+            <li><a href="#">Usuario</a></li>
+            <li><a href="#">Perfil</a></li>
+        </ul>
     </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <h1 class="welcome-text">BIENVENIDO, TRABAJADOR</h1>
+        <div class="button-container">
+            <a href="{% url 'rendicion' %}" class="primary-button">INGRESAR RENDICIÓN</a>
+            <a href="#" class="primary-button">HISTORIAL DE RENDICIONES</a>
+            <a href="#" class="primary-button">APELAR RENDICIÓN</a>
+        </div>
+    </main>
+
 </body>
 </html>

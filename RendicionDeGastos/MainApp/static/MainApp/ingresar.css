@@ -1,0 +1,81 @@
+/* General */
+body {
+    background-color: #000;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Main content */
+.login-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Login container */
+.login-container {
+    /* Eliminamos el borde y el encapsulamiento */
+    padding: 40px;
+    max-width: 500px; /* Ajustamos el ancho */
+    text-align: center;
+}
+
+.login-container h1 {
+    font-size: 3rem; /* Aumentamos el tamaño del texto */
+    margin-bottom: 20px;
+}
+
+.login-container p {
+    font-size: 1.2rem; /* Aumentamos el tamaño del texto */
+    margin-bottom: 40px;
+}
+
+/* Formulario */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Aumentamos el espacio entre los campos */
+}
+
+/* Form group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 1.4rem; /* Aumentamos el tamaño de los labels */
+    margin-bottom: 10px;
+}
+
+.form-group input {
+    padding: 15px;
+    font-size: 1.2rem; /* Aumentamos el tamaño de los inputs */
+    background-color: #000;
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 10px;
+}
+
+/* Botón de Ingresar */
+.primary-button {
+    padding: 20px 40px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.5rem; /* Aumentamos el tamaño del botón */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.primary-button:hover {
+    transform: scale(1.05);
+    background-color: #e0e0e0;
+}
