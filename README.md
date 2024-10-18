@@ -9,4 +9,7 @@ Integrantes:
 ## Wiki
 
 Puede acceder a la wiki del repositorio mediante el siguient enlace [enlace](https://gitlab.com/grupo4-2024-proyinf/GRUPO4-2024-PROYINF/-/wikis/Wiki)
+
+## Enlace video hito 3
+[video](https://youtu.be/PczyER8rk8M)
     
