@@ -1,15 +1,12 @@
-/* General */
+/* Estilos del cuerpo */
 body {
-    background-color: #000;
-    color: #fff;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Arial', sans-serif;
 }
 
-/* Main content */
+/* Contenedor principal de ingreso */
 .login-main {
     display: flex;
     justify-content: center;
@@ -17,21 +14,19 @@ body {
     height: 100vh;
 }
 
-/* Login container */
 .login-container {
-    /* Eliminamos el borde y el encapsulamiento */
     padding: 40px;
-    max-width: 500px; /* Ajustamos el ancho */
+    max-width: 500px;
     text-align: center;
 }
 
 .login-container h1 {
-    font-size: 3rem; /* Aumentamos el tamaño del texto */
+    font-size: 3rem;
     margin-bottom: 20px;
 }
 
 .login-container p {
-    font-size: 1.2rem; /* Aumentamos el tamaño del texto */
+    font-size: 1.2rem;
     margin-bottom: 40px;
 }
 
@@ -39,43 +34,19 @@ body {
 .login-form {
     display: flex;
     flex-direction: column;
-    gap: 30px; /* Aumentamos el espacio entre los campos */
-}
-
-/* Form group */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+    gap: 30px;
 }
 
 .form-group label {
-    font-size: 1.4rem; /* Aumentamos el tamaño de los labels */
+    font-size: 1.4rem;
     margin-bottom: 10px;
 }
 
 .form-group input {
     padding: 15px;
-    font-size: 1.2rem; /* Aumentamos el tamaño de los inputs */
+    font-size: 1.2rem;
     background-color: #000;
     border: 2px solid #fff;
     color: #fff;
     border-radius: 10px;
-}
-
-/* Botón de Ingresar */
-.primary-button {
-    padding: 20px 40px;
-    background-color: #fff;
-    color: #000;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.5rem; /* Aumentamos el tamaño del botón */
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.primary-button:hover {
-    transform: scale(1.05);
-    background-color: #e0e0e0;
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'MainApp/gestion_reembolsos.css' %}">
+    <title>Gestión de Reembolsos</title>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="{% url 'index' %}">INICIO</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Usuario</a></li>
+            <li><a href="#">Perfil</a></li>
+        </ul>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <h1 class="welcome-text">GESTIÓN DE REEMBOLSOS</h1>
+        <p class="user-welcome">Bienvenido, "Usuario Activo"</p>
+
+        <!-- Tabla de reembolsos -->
+        <div class="table-container">
+            <table class="reembolso-table">
+                <thead>
+                    <tr>
+                        <th>N° Rendición</th>
+                        <th>Nombre</th>
+                        <th>Fecha</th>
+                        <th>Monto a Reembolsar</th>
+                        <th>Estado Reembolso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reembolso in reembolsos %}
+                    <tr>
+                        <td>{{ reembolso.numero }}</td>
+                        <td>{{ reembolso.nombre }}</td>
+                        <td>{{ reembolso.fecha }}</td>
+                        <td>{{ reembolso.monto }}</td>
+                        <td>{{ reembolso.estado }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botón de iniciar reembolso -->
+        <div class="button-container">
+            <a href="{% url 'rendicion' %}" class="primary-button">INICIAR REEMBOLSO</a>
+        </div>
+    </main>
+
+</body>
+</html>

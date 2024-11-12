@@ -67,57 +67,59 @@ body {
     font-weight: bold;
 }
 
-/*-------------------------Lista de Rendiciones----------------------------*/
+/*-------------------------Botones----------------------------*/
 
-.rendicion-list {
+.button-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 10px;
+    margin-top: 30px;
 }
 
-.rendicion-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    color: #fff;
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s, background-color 0.3s;
-}
-
-.rendicion-item:hover {
-    transform: translateY(-5px);
-    background-color: #444;
-}
-
-.rendicion-nombre {
-    font-weight: bold;
-}
-
-.rendicion-estado {
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-/* Colores específicos para diferentes estados */
-.rendicion-estado.aprobado {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.rendicion-estado.rechazado {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.rendicion-estado.pendiente {
-    background-color: #ffc107;
+.primary-button {
+    padding: 20px 40px;
+    background-color: #fff;
     color: #000;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.primary-button:hover {
+    transform: scale(1.05);
+    background-color: #e0e0e0;
+}
+
+/*-------------------------Estilos Específicos para la Tabla----------------------------*/
+
+.table-container {
+    overflow-x: auto;
+    margin: 20px auto;
+    max-width: 90%;
+}
+
+.reembolso-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reembolso-table th, .reembolso-table td {
+    padding: 10px 15px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+.reembolso-table th {
+    background-color: #444;
+    color: #fff;
+    font-weight: bold;
+}
+
+.reembolso-table td {
+    background-color: #222;
+    color: #fff;
 }

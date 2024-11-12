@@ -25,3 +25,34 @@ def rendicion(request):
 # Vista para la rendicion
 def ingresar(request):
     return render(request, 'MainApp/ingresar.html')
+
+def forgot_password(request):
+    return render(request, 'MainApp/forgot_password.html')  
+
+def exito(request):
+    return render(request, 'MainApp/exito.html')  
+
+def rendiciones_ingresadas(request):
+    rendiciones = [
+        {'id': 1, 'nombre': 'Rendición 1', 'estado': 'Aprobado'},
+        {'id': 2, 'nombre': 'Rendición 2', 'estado': 'Rechazado'},
+        {'id': 3, 'nombre': 'Rendición 3', 'estado': 'Aprobado'},
+        {'id': 4, 'nombre': 'Rendición 4', 'estado': 'Pendiente'},
+    ]
+    return render(request, 'MainApp/rendiciones_ingresadas.html', {'rendiciones': rendiciones})
+
+def gestion_reembolsos(request):
+    # Datos ficticios para mostrar en la tabla
+    reembolsos = [
+        {
+            'numero': '05/10/2023',
+            'nombre': 'Wide World Importers',
+            'fecha': 'Redes',
+            'monto': '111,001',
+            'estado': '250,001'
+        }
+    ]
+    return render(request, 'MainApp/gestion_reembolsos.html', {'reembolsos': reembolsos})
+
+def resumen_rendicion(request):
+    return render(request, 'MainApp/resumen_rendicion.html')  
