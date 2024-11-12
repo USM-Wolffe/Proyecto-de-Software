@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'MainApp/styles.css' %}">
-    <title>Contador</title>
+    <link rel="stylesheet" href="{% static 'MainApp/styles.css' %}"> <!-- Usa la hoja de estilos general -->
+    <title>Confirmación de Rendición</title>
 </head>
 <body>
 
@@ -22,9 +22,9 @@
 
     <!-- Contenido principal -->
     <main class="main-content">
-        <div class="welcome-text">Bienvenido, Contador</div> <!-- Aquí se mostrará el nombre del usuario más adelante <div class="welcome-text">BIENVENIDO, {{ user.username }}</div> u -->
+        <h1 class="welcome-text">RENDICIÓN INGRESADA CON ÉXITO</h1>
         <div class="button-container">
-            <button class="primary-button">RENDICIONES INGRESADAS</button>
+            <a href="{% url 'trabajador' %}" class="primary-button">VOLVER</a>
         </div>
     </main>
 

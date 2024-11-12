@@ -1,0 +1,123 @@
+/*-------------------------CSS General----------------------------*/
+
+/* Reset y configuración básica */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Color de fondo y configuración de altura */
+body {
+    background-color: #000;
+    color: #fff;
+    height: 100vh;
+}
+
+/*-------------------------Header----------------------------*/
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    padding: 20px;
+    border-bottom: 2px solid #fff;
+}
+
+.header .logo a {
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.header .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.header .nav-links li:hover {
+    transform: scale(1.01);
+}
+
+/*-------------------------Contenido Principal----------------------------*/
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px); /* Ajusta el contenido para estar centrado */
+    text-align: center;
+}
+
+.welcome-text {
+    font-size: 2rem;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+/*-------------------------Lista de Rendiciones----------------------------*/
+
+.rendicion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.rendicion-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.rendicion-item:hover {
+    transform: translateY(-5px);
+    background-color: #444;
+}
+
+.rendicion-nombre {
+    font-weight: bold;
+}
+
+.rendicion-estado {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Colores específicos para diferentes estados */
+.rendicion-estado.aprobado {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.rendicion-estado.rechazado {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.rendicion-estado.pendiente {
+    background-color: #ffc107;
+    color: #000;
+}
