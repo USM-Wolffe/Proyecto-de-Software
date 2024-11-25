@@ -123,3 +123,34 @@ body {
     background-color: #222;
     color: #fff;
 }
+
+.approve-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.reject-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.approve-button:hover, .reject-button:hover {
+    opacity: 0.8;
+    a {
+        color: #888888 !important; /* Fuerza el color del enlace */
+        text-decoration: none !important; /* Quita el subrayado */
+    }
+    
+    a:hover {
+        color: #aaaaaa !important; /* Cambia el color al pasar el mouse */
+        text-decoration: underline !important; /* Añade subrayado al pasar el mouse */
+    }
+    

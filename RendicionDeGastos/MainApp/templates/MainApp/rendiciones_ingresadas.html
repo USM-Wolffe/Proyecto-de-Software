@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'MainApp/rendiciones.css' %}"> <!-- Usa tu CSS existente -->
+    <link rel="stylesheet" href="{% static 'MainApp/rendiciones.css' %}">
     <title>Rendiciones Ingresadas</title>
 </head>
 <body>
@@ -23,16 +23,26 @@
     <main class="main-content">
         <h1 class="welcome-text">RENDICIONES INGRESADAS</h1>
         <div class="rendicion-list">
-            {% for rendicion in rendiciones %}
+            {% for rendicion in page_obj.object_list %}
                 <div class="rendicion-item">
-                    <span class="rendicion-nombre">{{ rendicion.nombre }}</span>
+                    <span class="rendicion-nombre">Rendición {{ rendicion.id }}</span>
                     <span class="rendicion-estado">{{ rendicion.estado }}</span>
                 </div>
             {% endfor %}
         </div>
+
+        <!-- Navegación de paginación -->
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="pagination-button">Anterior</a>
+            {% endif %}
+            <span class="pagination-info">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="pagination-button">Siguiente</a>
+            {% endif %}
+        </div>
+        
     </main>
-    
-    
 
 </body>
 </html>

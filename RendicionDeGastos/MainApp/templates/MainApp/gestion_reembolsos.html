@@ -6,6 +6,19 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'MainApp/gestion_reembolsos.css' %}">
     <title>Gestión de Reembolsos</title>
+
+    <style>
+        a {
+            color: rgb(255, 255, 255) !important;
+            text-decoration: none !important;
+        }
+    
+        a:hover {
+            color: #ffffff !important;
+            text-decoration: underline !important;
+        }
+    </style>
+    
 </head>
 <body>
 
@@ -31,29 +44,60 @@
                 <thead>
                     <tr>
                         <th>N° Rendición</th>
-                        <th>Nombre</th>
                         <th>Fecha</th>
                         <th>Monto a Reembolsar</th>
                         <th>Estado Reembolso</th>
+                        <th>Comentario</th>
+                        <th>Archivo</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for reembolso in reembolsos %}
                     <tr>
-                        <td>{{ reembolso.numero }}</td>
-                        <td>{{ reembolso.nombre }}</td>
-                        <td>{{ reembolso.fecha }}</td>
-                        <td>{{ reembolso.monto }}</td>
+                        <td>{{ reembolso.id }}</td>
+                        <td>{{ reembolso.fecha_creacion|date:"M d, Y" }}</td>
+                        <td>${{ reembolso.total }}</td>
                         <td>{{ reembolso.estado }}</td>
+                        <td>
+                            {% for gasto in reembolso.gastos.all %}
+                                <p>{{ gasto.descripcion }}</p>
+                            {% empty %}
+                                Sin comentarios
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for gasto in reembolso.gastos.all %}
+                                {% if gasto.documento_respaldo %}
+                                    <a href="{{ gasto.documento_respaldo.url }}" target="_blank">Ver archivo</a>
+                                {% else %}
+                                    Sin archivo
+                                {% endif %}
+                            {% empty %}
+                                Sin archivo
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <!-- Formulario para aprobar -->
+                            <form method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="rendicion_id" value="{{ reembolso.id }}">
+                                <input type="hidden" name="accion" value="aprobar">
+                                <button type="submit" class="approve-button">Aprobar</button>
+                            </form>
+
+                            <!-- Formulario para rechazar -->
+                            <form method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="rendicion_id" value="{{ reembolso.id }}">
+                                <input type="hidden" name="accion" value="rechazar">
+                                <button type="submit" class="reject-button">Rechazar</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
-
-        <!-- Botón de iniciar reembolso -->
-        <div class="button-container">
-            <a href="{% url 'rendicion' %}" class="primary-button">INICIAR REEMBOLSO</a>
         </div>
     </main>
 
