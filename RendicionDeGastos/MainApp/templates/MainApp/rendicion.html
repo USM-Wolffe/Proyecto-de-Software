@@ -22,7 +22,9 @@
 
     <!-- Contenido principal -->
     <main class="main-content">
-        <form class="rendicion-form">
+        <!-- Cambiado el atributo 'action' para enviar al endpoint del backend -->
+        <form class="rendicion-form" method="POST" action="{% url 'crear_gasto' %}" enctype="multipart/form-data">
+            {% csrf_token %}
             <!-- Fecha -->
             <div class="form-group">
                 <label for="fecha">Fecha</label>
@@ -45,8 +47,7 @@
                 <label for="monto">Monto</label>
                 <input type="number" id="monto" name="monto" required>
             </div>
-
-            <!-- Documentos de Respaldo -->
+<!-- Documentos de Respaldo -->
             <div class="form-group">
                 <label for="documento">Documentos de Respaldo</label>
                 <input type="file" id="documento" name="documento" accept=".pdf,.jpg,.png,.doc,.docx" required>

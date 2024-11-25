@@ -23,19 +23,25 @@
     <!-- Contenedor principal -->
     <div class="container">
         <h1>Rendición N° {{ rendicion.id }}</h1>
-        
+
+        <!-- Mostrar los gastos -->
         <div class="gastos">
             {% for gasto in gastos %}
-                <div class="gasto-item">Gasto {{ forloop.counter }}: {{ gasto.tipo }}</div>
+                <div class="gasto-item">Gasto {{ forloop.counter }}: {{ gasto.tipo }}, Monto: ${{ gasto.monto }}</div>
             {% endfor %}
             <div class="añadir-gasto">
                 <a href="{% url 'rendicion' %}" class="primary-button">Añadir gasto</a>
             </div>
         </div>
-        
+
+        <!-- Total de la rendición -->
         <div class="total">Total: ${{ total }}</div>
-        
-        <a href="{% url 'trabajador' %}" class="registrar-btn">Registrar Rendición</a>
+
+        <!-- Botón para registrar la rendición -->
+        <form method="POST" action="{% url 'registrar_rendicion' %}">
+            {% csrf_token %}
+            <button type="submit" class="registrar-btn">Registrar Rendición</button>
+        </form>
     </div>
 </body>
 </html>
