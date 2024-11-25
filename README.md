@@ -13,6 +13,10 @@ Puede acceder a la wiki del repositorio mediante el siguiente [enlace](https://g
 ## Enlace video hito 3
 Puede acceder al video del prototipo en el siguiente [enlace](https://youtu.be/PczyER8rk8M)
 
+## Enlace video hito 5
+Puede acceder al video del resultado final en el siguiente [enlace](https://youtu.be/jyo13oVk6SY)
+
+
 ## Pasos para levantar el proyecto:
 
 1. **Clonación del repositorio**: Asegúrese de clonar el repositorio en su dispositivo utilizando uno de los siguientes enlaces:
