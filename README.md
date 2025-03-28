@@ -45,18 +45,16 @@ Puede acceder al video del resultado final en el siguiente [enlace](https://yout
 
 
 
-**INF225 2025-1**
+## INF-225 Primer semestre 2025
+# Hito 1:
 
-Integrantes
-Fernanda Ojeda
-Benjamín Reyes
-Badir Villegas
-Sebastián Reyes
+1. Acualización Integrantes se mantiene:
+   - Badir Villegas - 202273020-K
+   - Benjamin Reyes - 202273053-6
+   - Fernanda Ojeda - 202273025-0
+   - Sebastian Reyes -202273105-2
+2. Repositorio Proyecto base se indica a principio de este README  
 
-
-El proyecto que se continuará trabajando este semestre es el Sistema de Rendición de Gastos, el cual busca digitalizar y automatizar el proceso de gestión de rendiciones en una organización, asegurando transparencia, trazabilidad y eficiencia en el uso de recursos financieros.
-
-     ```
-
+    
 
     
