@@ -43,18 +43,6 @@ Puede acceder al video del resultado final en el siguiente [enlace](https://yout
      python manage.py runserver 8080
 
 
-
-
-## INF-225 Primer semestre 2025
-# Hito 1:
-
-1. Acualización Integrantes se mantiene:
-   - Badir Villegas - 202273020-K
-   - Benjamin Reyes - 202273053-6
-   - Fernanda Ojeda - 202273025-0
-   - Sebastian Reyes -202273105-2
-2. Repositorio Proyecto base se indica a principio de este README  
-
     
 
     
