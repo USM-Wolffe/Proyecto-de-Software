@@ -41,6 +41,21 @@ Puede acceder al video del resultado final en el siguiente [enlace](https://yout
    - Inicie el servidor de desarrollo de Django:
      ```bash
      python manage.py runserver 8080
+
+
+
+
+**INF225 2025-1**
+
+Integrantes
+Fernanda Ojeda
+Benjamín Reyes
+Badir Villegas
+Sebastián Reyes
+
+
+El proyecto que se continuará trabajando este semestre es el Sistema de Rendición de Gastos, el cual busca digitalizar y automatizar el proceso de gestión de rendiciones en una organización, asegurando transparencia, trazabilidad y eficiencia en el uso de recursos financieros.
+
      ```
 
 
