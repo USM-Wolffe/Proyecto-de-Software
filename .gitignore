@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+*.pyo
+*.pyd
+.Python
+
+# Django
+db.sqlite3
+media/
+*.log
+
+# Virtualenv
+venv/
+.env
+
+# VSCode
+.vscode/
+
+# Docker
+*.pid
+*.sock
+
+# MacOS / Linux / Windows
+.DS_Store
+Thumbs.db
+
+# Node (si en el futuro usas)
+node_modules/
+
+# SQL files (si no los necesitas versionar)
+*.sql
