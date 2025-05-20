@@ -140,3 +140,18 @@ body {
     transform: scale(1.05);
     background-color: #e0e0e0;
 }
+
+.table-button {
+    background-color: white;
+    border: 2px solid #333;
+    padding: 4px 10px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #000;
+    transition: background-color 0.2s ease;
+}
+
+.table-button:hover {
+    background-color: #e0e0e0;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'MainApp/gestion_reembolsos.css' %}">
+    <title>Ingresador</title>
+
+    <style>
+        a {
+            color: rgb(255, 255, 255) !important;
+            text-decoration: none !important;
+        }
+
+        a:hover {
+            color: #ffffff !important;
+            text-decoration: underline !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="{% url 'index' %}">INICIO</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Usuario</a></li>
+            <li><a href="#">Perfil</a></li>
+        </ul>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <h1 class="welcome-text">PROPUESTAS DE RENDICIÓN</h1>
+        <p class="user-welcome">Bienvenido, "Ingresador Activo"</p>
+
+        <!-- Tabla de propuestas -->
+        <div class="table-container">
+            <table class="reembolso-table">
+                <thead>
+                    <tr>
+                        <th>N° Rendición</th>
+                        <th>Fecha</th>
+                        <th>Monto Total</th>
+                        <th>Estado</th>
+                        <th>Documentos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for propuesta in propuestas %}
+                    <tr>
+                        <td>{{ propuesta.id }}</td>
+                        <td>{{ propuesta.fecha_creacion|date:"M d, Y" }}</td>
+                        <td>${{ propuesta.total }}</td>
+                        <td>{{ propuesta.estado }}</td>
+                        <td>
+                            {% for gasto in propuesta.gastos.all %}
+                                {% if gasto.documento_respaldo %}
+                                    <a href="{{ gasto.documento_respaldo.url }}" target="_blank">Ver archivo</a><br>
+                                {% else %}
+                                    Sin archivo<br>
+                                {% endif %}
+                            {% empty %}
+                                Sin documentos
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <!-- Formulario para aceptar -->
+                            <form method="POST" action="{% url 'accion_ingresador' %}" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="rendicion_id" value="{{ propuesta.id }}">
+                                <input type="hidden" name="accion" value="aceptar">
+                                <button type="submit" class="approve-button">Aceptar</button>
+                            </form>
+
+                            <!-- Formulario para rechazar -->
+                            <form method="POST" action="{% url 'accion_ingresador' %}" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="rendicion_id" value="{{ propuesta.id }}">
+                                <input type="hidden" name="accion" value="rechazar">
+                                <button type="submit" class="reject-button">Rechazar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+</html>

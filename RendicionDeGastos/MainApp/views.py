@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Gasto, Rendicion
 from django.core.paginator import Paginator
-
+from django.views.decorators.csrf import csrf_exempt  
 # Vista para la página de inicio
 def index(request):
     return render(request, 'MainApp/index.html')
@@ -153,3 +153,33 @@ def crear_gasto(request):
         return redirect('resumen_rendicion')
 
     return HttpResponse('Método no permitido', status=405)
+
+# Vista para el Ingresador: ver propuestas pendientes
+def ingresador(request):
+    propuestas = Rendicion.objects.filter(estado='Pendiente').order_by('-fecha_creacion')  # Más recientes primero
+    return render(request, 'MainApp/ingresador.html', {
+        'propuestas': propuestas
+    })
+
+
+
+@csrf_exempt  # solo si tienes problemas con csrf, si no, puedes omitirlo
+def accion_ingresador(request):
+    if request.method == 'POST':
+        rendicion_id = request.POST.get('rendicion_id')
+        accion = request.POST.get('accion')
+
+        try:
+            rendicion = Rendicion.objects.get(id=rendicion_id)
+        except Rendicion.DoesNotExist:
+            return HttpResponse("Rendición no encontrada", status=404)
+
+        if accion == 'aceptar':
+            rendicion.estado = 'Aceptada'
+        elif accion == 'rechazar':
+            rendicion.estado = 'Rechazada'
+        rendicion.save()
+
+        return redirect('ingresador')
+
+    return HttpResponse("Método no permitido", status=405)
