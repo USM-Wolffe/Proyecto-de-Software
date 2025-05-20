@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Gasto, Rendicion
 from django.core.paginator import Paginator
-
+from django.views.decorators.csrf import csrf_exempt
 # Vista para la página de inicio
 def index(request):
     return render(request, 'MainApp/index.html')
@@ -12,7 +12,7 @@ def trabajador(request):
     return render(request, 'MainApp/trabajador.html')
 
 # Vista para el contador
-def contador(request):
+def validador(request):
     return render(request, 'MainApp/contador.html')
 
 # Vista para el jefe de área
@@ -54,6 +54,7 @@ def resumen_rendicion(request):
     })
 
 # Vista para registrar la rendición final
+@csrf_exempt
 def registrar_rendicion(request):
     if request.method == 'POST':
         # Crear una nueva rendición
@@ -104,23 +105,30 @@ def aprobadas(request):
     rendiciones_aprobadas = Rendicion.objects.filter(estado='Aprobado').order_by('id')  # Solo aprobadas en orden ascendente
     return render(request, 'MainApp/aprobadas.html', {'rendiciones': rendiciones_aprobadas})
 
+
 # Vista para gestionar reembolsos
+@csrf_exempt
 def gestion_reembolsos(request):
     if request.method == 'POST':
         rendicion_id = request.POST.get('rendicion_id')
         accion = request.POST.get('accion')
-
+        
         # Buscar la rendición y actualizar su estado
         rendicion = Rendicion.objects.get(id=rendicion_id)
         if accion == 'aprobar':
             rendicion.estado = 'Aprobado'
+            print(f"[NOTIFICACIÓN] ▶ Rendición #{rendicion.id} fue APROBADA.")
+            print(f"[NOTIFICACIÓN] → Notificar a PRESUPUESTO CENTRAL: iniciar reembolso.")
+            print(f"[NOTIFICACIÓN] → Notificar al SOLICITANTE: rendición aceptada.")
         elif accion == 'rechazar':
             rendicion.estado = 'Rechazado'
+            print(f"[NOTIFICACIÓN] ▶ Rendición #{rendicion.id} fue RECHAZADA.")
+            print(f"[NOTIFICACIÓN] → Notificar al SOLICITANTE: rendición rechazada.")
         rendicion.save()
 
         # Redirigir a la misma página para reflejar los cambios
         return redirect('gestion_reembolsos')
-
+        
     # Obtener todas las rendiciones pendientes
     rendiciones_pendientes = Rendicion.objects.filter(estado='Pendiente')
 

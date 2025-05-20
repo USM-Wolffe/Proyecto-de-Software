@@ -34,6 +34,7 @@
                         <th>Fecha</th>
                         <th>Monto Aprobado</th>
                         <th>Estado</th>
+                        <th>Comentario</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +44,7 @@
                         <td>{{ rendicion.fecha_creacion|date:"M d, Y" }}</td>
                         <td>${{ rendicion.total }}</td>
                         <td>{{ rendicion.estado }}</td>
+                        
                     </tr>
                     {% endfor %}
                 </tbody>

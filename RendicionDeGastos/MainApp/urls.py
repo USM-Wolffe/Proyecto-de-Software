@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     index,
     trabajador,
-    contador,
+    validador,
     jefe,
     rendicion,
     ingresar,
@@ -19,7 +19,7 @@ from .views import (
 urlpatterns = [
     path('', index, name='index'),  # Ruta para la página de inicio
     path('trabajador/', trabajador, name='trabajador'),  # Ruta para la vista del trabajador
-    path('contador/', contador, name='contador'),  # Ruta para la vista del contador
+    path('validador/', validador, name='validador'),  # Ruta para la vista del validador
     path('jefe/', jefe, name='jefe'),  # Ruta para la vista del jefe
     path('rendicion/', rendicion, name='rendicion'),
     path('ingresar/', ingresar, name='ingresar'),
