@@ -153,3 +153,19 @@ def crear_gasto(request):
         return redirect('resumen_rendicion')
 
     return HttpResponse('Método no permitido', status=405)
+
+# Vista para el ingresador
+def ingresador(request):
+    return render(request, 'MainApp/ingresador.html')
+
+# Vista para el visualizador
+def visualizador(request):
+    return render(request, 'MainApp/visualizador.html')
+
+# Vista de estadísticas
+def estadisticas(request):
+    return render(request, 'MainApp/estadisticas.html')
+
+# Vista para generar informe
+def generar_informe(request):
+    return render(request, 'MainApp/generar_informe.html')

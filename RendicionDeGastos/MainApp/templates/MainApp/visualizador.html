@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'MainApp/styles.css' %}">
+    <title>Visualizador</title>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="{% url 'index' %}">INICIO</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Usuario</a></li>
+            <li><a href="#">Perfil</a></li>
+        </ul>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <h1 class="welcome-text">BIENVENIDO, VISUALIZADOR</h1>
+        <div class="button-container">
+            <a href="{% url 'aprobadas' %}" class="primary-button">RENDICIONES APROBADAS</a>
+            <a href="{% url 'estadisticas' %}" class="primary-button">ESTADÍSTICAS</a>
+            <a href="{% url 'generar_informe' %}" class="primary-button">GENERAR INFORME</a>
+        </div>
+    </main>
+
+</body>
+</html>

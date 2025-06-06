@@ -33,6 +33,8 @@
                         <th>N° Rendición</th>
                         <th>Fecha</th>
                         <th>Monto Aprobado</th>
+                        <th>Comentario</th>
+                        <th>Archivo</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
@@ -42,6 +44,24 @@
                         <td>{{ rendicion.id }}</td>
                         <td>{{ rendicion.fecha_creacion|date:"M d, Y" }}</td>
                         <td>${{ rendicion.total }}</td>
+                        <td>
+                            {% for gasto in rendicion.gastos.all %}
+                                <p>{{ gasto.descripcion }}</p>
+                            {% empty %}
+                                Sin comentarios
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for gasto in rendicion.gastos.all %}
+                                {% if gasto.documento_respaldo %}
+                                    <a href="{{ gasto.documento_respaldo.url }}" target="_blank">Ver archivo</a><br>
+                                {% else %}
+                                    Sin archivo<br>
+                                {% endif %}
+                            {% empty %}
+                                Sin archivo
+                            {% endfor %}
+                        </td>
                         <td>{{ rendicion.estado }}</td>
                     </tr>
                     {% endfor %}
