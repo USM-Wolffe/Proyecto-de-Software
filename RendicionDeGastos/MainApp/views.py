@@ -164,7 +164,18 @@ def visualizador(request):
 
 # Vista de estadísticas
 def estadisticas(request):
-    return render(request, 'MainApp/estadisticas.html')
+    # Contar las rendiciones según su estado
+    aprobadas = Rendicion.objects.filter(estado='Aprobado').count()
+    rechazadas = Rendicion.objects.filter(estado='Rechazado').count()
+    pendientes = Rendicion.objects.filter(estado='Pendiente').count()
+
+    context = {
+        'aprobadas': aprobadas,
+        'rechazadas': rechazadas,
+        'pendientes': pendientes,
+    }
+
+    return render(request, 'MainApp/estadisticas.html', context)
 
 # Vista para generar informe
 def generar_informe(request):

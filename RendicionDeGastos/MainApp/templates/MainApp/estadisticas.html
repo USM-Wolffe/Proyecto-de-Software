@@ -19,7 +19,34 @@
     </header>
     <main class="main-content">
         <h1 class="welcome-text">ESTADÍSTICAS</h1>
-        <p>Próximamente se mostrarán las estadísticas del sistema.</p>
+
+        <div class="stats">
+            <p>Aprobadas: {{ aprobadas }}</p>
+            <p>Rechazadas: {{ rechazadas }}</p>
+            <p>Pendientes: {{ pendientes }}</p>
+        </div>
+
+        <canvas id="statusChart" width="400" height="400"></canvas>
     </main>
+
+    <!-- Cargar Chart.js desde CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('statusChart');
+        const chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Aprobadas', 'Rechazadas', 'Pendientes'],
+                datasets: [{
+                    data: [{{ aprobadas }}, {{ rechazadas }}, {{ pendientes }}],
+                    backgroundColor: ['#4CAF50', '#f44336', '#FF9800'],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
 </body>
 </html>
