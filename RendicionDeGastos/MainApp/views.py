@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Gasto, Rendicion
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 # Vista para la página de inicio
 def index(request):
@@ -163,8 +164,25 @@ def visualizador(request):
     return render(request, 'MainApp/visualizador.html')
 
 # Vista de estadísticas
+
 def estadisticas(request):
-    return render(request, 'MainApp/estadisticas.html')
+    """Muestra un resumen de las rendiciones junto con un grafico."""
+    conteo_estados = (
+        Rendicion.objects.values('estado')
+        .annotate(total=Count('estado'))
+        .order_by('estado')
+    )
+
+    labels = [c['estado'] for c in conteo_estados]
+    data = [c['total'] for c in conteo_estados]
+
+    context = {
+        'labels': labels,
+        'data': data,
+        'conteo_estados': conteo_estados,
+        'total_rendiciones': sum(data),
+    }
+    return render(request, 'MainApp/estadisticas.html', context)
 
 # Vista para generar informe
 def generar_informe(request):
