@@ -2,9 +2,24 @@ from django.db import models
 
 # Modelo para representar una Rendición
 class Rendicion(models.Model):
+    """Representa una rendición de gastos."""
+
+    ESTADO_INGRESADA = 'Ingresada'
+    ESTADO_PENDIENTE = 'Pendiente'
+    ESTADO_APROBADO = 'Aprobado'
+    ESTADO_RECHAZADO = 'Rechazado'
+
+    ESTADOS_CHOICES = [
+        (ESTADO_INGRESADA, 'Ingresada'),
+        (ESTADO_PENDIENTE, 'Pendiente'),
+        (ESTADO_APROBADO, 'Aprobado'),
+        (ESTADO_RECHAZADO, 'Rechazado'),
+    ]
+
     fecha_creacion = models.DateField(auto_now_add=True)  # Fecha en la que se crea la rendición
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # Monto total de la rendición
-    estado = models.CharField(max_length=20, default='En progreso')  # Estado de la rendición (Ej: En progreso, Confirmada)
+    # Estado de la rendición (controla las fases Ingreso/Validación)
+    estado = models.CharField(max_length=20, choices=ESTADOS_CHOICES, default=ESTADO_INGRESADA)
 
     def __str__(self):
         return f"Rendición {self.id} - {self.estado}"

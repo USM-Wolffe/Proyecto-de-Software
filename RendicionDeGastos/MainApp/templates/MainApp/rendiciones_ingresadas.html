@@ -26,7 +26,12 @@
             {% for rendicion in page_obj.object_list %}
                 <div class="rendicion-item">
                     <span class="rendicion-nombre">Rendición {{ rendicion.id }}</span>
-                    <span class="rendicion-estado">{{ rendicion.estado }}</span>
+                    <span class="rendicion-estado {{ rendicion.estado|lower }}">{{ rendicion.estado }}</span>
+                    <form method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="rendicion_id" value="{{ rendicion.id }}">
+                        <button type="submit" class="confirm-button">Confirmar</button>
+                    </form>
                 </div>
             {% endfor %}
         </div>
