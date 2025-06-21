@@ -27,11 +27,14 @@
                 <div class="rendicion-item">
                     <span class="rendicion-nombre">Rendición {{ rendicion.id }}</span>
                     <span class="rendicion-estado {{ rendicion.estado|lower }}">{{ rendicion.estado }}</span>
-                    <form method="POST" style="display:inline;">
-                        {% csrf_token %}
-                        <input type="hidden" name="rendicion_id" value="{{ rendicion.id }}">
-                        <button type="submit" class="confirm-button">Confirmar</button>
-                    </form>
+                    <div>
+                        <a href="{% url 'detalle_rendicion' rendicion.id %}" class="pagination-button">Detalles</a>
+                        <form method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="rendicion_id" value="{{ rendicion.id }}">
+                            <button type="submit" class="confirm-button">Confirmar</button>
+                        </form>
+                    </div>
                 </div>
             {% endfor %}
         </div>

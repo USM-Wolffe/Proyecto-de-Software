@@ -116,6 +116,30 @@ def rendiciones_ingresadas(request):
 
     return render(request, 'MainApp/rendiciones_ingresadas.html', {'page_obj': page_obj})
 
+# Vista para ver los detalles de una rendición ingresada
+def detalle_rendicion(request, rendicion_id):
+    """Muestra los gastos asociados y permite confirmar la rendición."""
+
+    rendicion = Rendicion.objects.get(id=rendicion_id)
+    gastos = Gasto.objects.filter(rendicion=rendicion)
+
+    if request.method == 'POST':
+        if rendicion.estado == Rendicion.ESTADO_INGRESADA:
+            rendicion.estado = Rendicion.ESTADO_PENDIENTE
+            rendicion.save()
+        return redirect('rendiciones_ingresadas')
+
+    total = sum(gasto.monto for gasto in gastos)
+    return render(
+        request,
+        'MainApp/detalle_rendicion.html',
+        {
+            'rendicion': rendicion,
+            'gastos': gastos,
+            'total': total,
+        },
+    )
+
 # Vista para mostrar solo las rendiciones aprobadas
 def aprobadas(request):
     rendiciones_aprobadas = Rendicion.objects.filter(

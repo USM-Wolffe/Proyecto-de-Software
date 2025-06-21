@@ -17,7 +17,8 @@ from .views import (
     ingresador,
     visualizador,
     estadisticas,
-    generar_informe
+    generar_informe,
+    detalle_rendicion
 )
 
 urlpatterns = [
@@ -39,4 +40,5 @@ urlpatterns = [
     path('visualizador/', visualizador, name='visualizador'),
     path('estadisticas/', estadisticas, name='estadisticas'),
     path('generar-informe/', generar_informe, name='generar_informe'),
+    path('rendicion/<int:rendicion_id>/', detalle_rendicion, name='detalle_rendicion'),
 ]
