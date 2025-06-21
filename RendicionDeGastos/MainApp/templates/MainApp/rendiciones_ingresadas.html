@@ -32,7 +32,14 @@
                         <form method="POST" style="display:inline;">
                             {% csrf_token %}
                             <input type="hidden" name="rendicion_id" value="{{ rendicion.id }}">
+                            <input type="hidden" name="accion" value="confirmar">
                             <button type="submit" class="confirm-button">Confirmar</button>
+                        </form>
+                        <form method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="rendicion_id" value="{{ rendicion.id }}">
+                            <input type="hidden" name="accion" value="rechazar">
+                            <button type="submit" class="reject-button">Rechazar</button>
                         </form>
                     </div>
                 </div>

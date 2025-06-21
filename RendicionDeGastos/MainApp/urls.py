@@ -18,7 +18,8 @@ from .views import (
     visualizador,
     estadisticas,
     generar_informe,
-    detalle_rendicion
+    detalle_rendicion,
+    mis_rendiciones,
 )
 
 urlpatterns = [
@@ -37,6 +38,7 @@ urlpatterns = [
     path('crear-gasto/', crear_gasto, name='crear_gasto'),  # NUEVO
     path('aprobadas/', aprobadas, name='aprobadas'),  # FIX: usar la vista importada directamente
     path('ingresador/', ingresador, name='ingresador'),
+    path('mis-rendiciones/', mis_rendiciones, name='mis_rendiciones'),
     path('visualizador/', visualizador, name='visualizador'),
     path('estadisticas/', estadisticas, name='estadisticas'),
     path('generar-informe/', generar_informe, name='generar_informe'),

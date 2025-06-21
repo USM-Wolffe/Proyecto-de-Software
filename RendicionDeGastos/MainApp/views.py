@@ -96,12 +96,16 @@ def rendiciones_ingresadas(request):
     """Lista y permite confirmar las rendiciones ingresadas."""
 
     if request.method == 'POST':
-        # El ingresador confirma una rendición para pasarla a revisión
         rendicion_id = request.POST.get('rendicion_id')
+        accion = request.POST.get('accion')
+
         if rendicion_id:
             rendicion = Rendicion.objects.get(id=rendicion_id)
             if rendicion.estado == Rendicion.ESTADO_INGRESADA:
-                rendicion.estado = Rendicion.ESTADO_PENDIENTE
+                if accion == 'confirmar':
+                    rendicion.estado = Rendicion.ESTADO_PENDIENTE
+                elif accion == 'rechazar':
+                    rendicion.estado = Rendicion.ESTADO_RECHAZADO
                 rendicion.save()
         return redirect('rendiciones_ingresadas')
 
@@ -124,8 +128,12 @@ def detalle_rendicion(request, rendicion_id):
     gastos = Gasto.objects.filter(rendicion=rendicion)
 
     if request.method == 'POST':
+        accion = request.POST.get('accion')
         if rendicion.estado == Rendicion.ESTADO_INGRESADA:
-            rendicion.estado = Rendicion.ESTADO_PENDIENTE
+            if accion == 'confirmar':
+                rendicion.estado = Rendicion.ESTADO_PENDIENTE
+            elif accion == 'rechazar':
+                rendicion.estado = Rendicion.ESTADO_RECHAZADO
             rendicion.save()
         return redirect('rendiciones_ingresadas')
 
@@ -231,3 +239,10 @@ def estadisticas(request):
 # Vista para generar informe
 def generar_informe(request):
     return render(request, 'MainApp/generar_informe.html')
+
+# Vista para que el trabajador consulte sus rendiciones
+def mis_rendiciones(request):
+    """Lista de rendiciones accesibles para el trabajador."""
+
+    rendiciones = Rendicion.objects.all().order_by('id')
+    return render(request, 'MainApp/mis_rendiciones.html', {'rendiciones': rendiciones})

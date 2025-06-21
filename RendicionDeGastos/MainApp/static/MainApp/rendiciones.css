@@ -154,17 +154,29 @@ body {
     margin: 0 10px;
 }
 
-.confirm-button {
-    background-color: #0d6efd;
-    color: white;
+.confirm-button,
+.reject-button {
     border: none;
-    padding: 5px 10px;
+    padding: 8px 16px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
     margin-left: 5px;
 }
 
-.confirm-button:hover {
-    opacity: 0.8;
+.confirm-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.reject-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.confirm-button:hover,
+.reject-button:hover {
+    opacity: 0.85;
 }
 
