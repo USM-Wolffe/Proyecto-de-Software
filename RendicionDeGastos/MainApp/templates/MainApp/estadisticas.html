@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'MainApp/styles.css' %}">
+    <title>Estadísticas</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="{% url 'index' %}">INICIO</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Usuario</a></li>
+            <li><a href="#">Perfil</a></li>
+        </ul>
+    </header>
+    <main class="main-content">
+        <h1 class="welcome-text">ESTADÍSTICAS</h1>
+
+        <div class="stats">
+            <p>Aprobadas: {{ aprobadas }}</p>
+            <p>Rechazadas: {{ rechazadas }}</p>
+            <p>Pendientes: {{ pendientes }}</p>
+        </div>
+
+        <canvas id="statusChart" width="400" height="400"></canvas>
+    </main>
+
+    <!-- Cargar Chart.js desde CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('statusChart');
+        const chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Aprobadas', 'Rechazadas', 'Pendientes'],
+                datasets: [{
+                    data: [
+                        +('{{ aprobadas|default:"0" }}'),
+                        +('{{ rechazadas|default:"0" }}'),
+                        +('{{ pendientes|default:"0" }}')
+                    ],
+                    backgroundColor: ['#4CAF50', '#f44336', '#FF9800'],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+</html>

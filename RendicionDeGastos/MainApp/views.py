@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Gasto, Rendicion
 from django.core.paginator import Paginator
+from django.utils import timezone
+
+MAX_MONTO = 1000000  # Límite de monto permitido por gasto
 
 # Vista para la página de inicio
 def index(request):
@@ -58,7 +61,7 @@ def registrar_rendicion(request):
     if request.method == 'POST':
         # Crear una nueva rendición
         rendicion = Rendicion.objects.create(
-            estado='Pendiente',  # Estado inicial
+            estado='Ingresada',  # Estado inicial para revisión del ingresador
             total=0.0  # Este valor se actualizará después
         )
 
@@ -153,3 +156,71 @@ def crear_gasto(request):
         return redirect('resumen_rendicion')
 
     return HttpResponse('Método no permitido', status=405)
+
+# Vista para el ingresador
+def ingresador(request):
+    return render(request, 'MainApp/ingresador.html')
+
+
+def revision_ingresador(request):
+    if request.method == 'POST':
+        rendicion_id = request.POST.get('rendicion_id')
+        accion = request.POST.get('accion')
+        rendicion = Rendicion.objects.get(id=rendicion_id)
+        if accion == 'aprobar':
+            valido = rendicion.fecha_creacion.year == timezone.now().year
+            for gasto in rendicion.gastos.all():
+                if gasto.monto > MAX_MONTO or not gasto.documento_respaldo or not gasto.descripcion:
+                    valido = False
+                    break
+            if valido:
+                rendicion.estado = 'Pendiente'
+            else:
+                rendicion.estado = 'Rechazado'
+        elif accion == 'rechazar':
+            rendicion.estado = 'Rechazado'
+        rendicion.save()
+        return redirect('revision_ingresador')
+
+    revisiones = Rendicion.objects.filter(estado='Ingresada')
+    for r in revisiones:
+        gastos = Gasto.objects.filter(rendicion=r)
+        r.total = sum(g.monto for g in gastos)
+        r.save()
+    return render(request, 'MainApp/revision_ingresador.html', {'rendiciones': revisiones})
+
+# Vista para el visualizador
+def visualizador(request):
+    return render(request, 'MainApp/visualizador.html')
+
+# Vista de estadísticas
+def estadisticas(request):
+    # Contar las rendiciones según su estado
+    aprobadas = Rendicion.objects.filter(estado='Aprobado').count()
+    rechazadas = Rendicion.objects.filter(estado='Rechazado').count()
+    pendientes = Rendicion.objects.filter(estado='Pendiente').count()
+
+    context = {
+        'aprobadas': aprobadas,
+        'rechazadas': rechazadas,
+        'pendientes': pendientes,
+    }
+
+    return render(request, 'MainApp/estadisticas.html', context)
+
+# Vista para generar informe
+def generar_informe(request):
+    return render(request, 'MainApp/generar_informe.html')
+
+
+def descargar_informe(request):
+    rendiciones = Rendicion.objects.filter(estado='Aprobado')
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="informe.csv"'
+
+    import csv
+    writer = csv.writer(response)
+    writer.writerow(['ID', 'Fecha', 'Total', 'Estado'])
+    for r in rendiciones:
+        writer.writerow([r.id, r.fecha_creacion, r.total, r.estado])
+    return response

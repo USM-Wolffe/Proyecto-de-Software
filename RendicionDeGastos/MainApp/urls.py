@@ -13,7 +13,13 @@ from .views import (
     resumen_rendicion,
     registrar_rendicion,
     crear_gasto,
-    aprobadas
+    aprobadas,
+    ingresador,
+    revision_ingresador,
+    visualizador,
+    estadisticas,
+    generar_informe,
+    descargar_informe
 )
 
 urlpatterns = [
@@ -31,4 +37,10 @@ urlpatterns = [
     path('registrar-rendicion/', registrar_rendicion, name='registrar_rendicion'),
     path('crear-gasto/', crear_gasto, name='crear_gasto'),  # NUEVO
     path('aprobadas/', aprobadas, name='aprobadas'),  # FIX: usar la vista importada directamente
+    path('ingresador/', ingresador, name='ingresador'),
+    path('revision-ingresador/', revision_ingresador, name='revision_ingresador'),
+    path('visualizador/', visualizador, name='visualizador'),
+    path('estadisticas/', estadisticas, name='estadisticas'),
+    path('generar-informe/', generar_informe, name='generar_informe'),
+    path('descargar-informe/', descargar_informe, name='descargar_informe'),
 ]
