@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Gasto, Rendicion
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 # Vista para la página de inicio
 def index(request):
@@ -56,10 +57,11 @@ def resumen_rendicion(request):
 # Vista para registrar la rendición final
 def registrar_rendicion(request):
     if request.method == 'POST':
-        # Crear una nueva rendición
+        # Crear una nueva rendición ingresada por el trabajador
         rendicion = Rendicion.objects.create(
-            estado='Pendiente',  # Estado inicial
-            total=0.0  # Este valor se actualizará después
+            # El primer estado es "Ingresada"
+            estado=Rendicion.ESTADO_INGRESADA,
+            total=0.0,  # Este valor se actualizará después
         )
 
         # Asociar los gastos temporales a esta rendición
@@ -91,7 +93,22 @@ def exito(request):
 
 # Vista para mostrar rendiciones ingresadas con paginación
 def rendiciones_ingresadas(request):
-    rendiciones = Rendicion.objects.all().order_by('id')  # Orden ascendente
+    """Lista y permite confirmar las rendiciones ingresadas."""
+
+    if request.method == 'POST':
+        # El ingresador confirma una rendición para pasarla a revisión
+        rendicion_id = request.POST.get('rendicion_id')
+        if rendicion_id:
+            rendicion = Rendicion.objects.get(id=rendicion_id)
+            if rendicion.estado == Rendicion.ESTADO_INGRESADA:
+                rendicion.estado = Rendicion.ESTADO_PENDIENTE
+                rendicion.save()
+        return redirect('rendiciones_ingresadas')
+
+    # El ingresador sólo visualiza las rendiciones ingresadas
+    rendiciones = Rendicion.objects.filter(
+        estado=Rendicion.ESTADO_INGRESADA
+    ).order_by('id')
     paginator = Paginator(rendiciones, 6)  # 6 rendiciones por página
 
     page_number = request.GET.get('page')  # Obtén el número de página de la URL
@@ -99,9 +116,35 @@ def rendiciones_ingresadas(request):
 
     return render(request, 'MainApp/rendiciones_ingresadas.html', {'page_obj': page_obj})
 
+# Vista para ver los detalles de una rendición ingresada
+def detalle_rendicion(request, rendicion_id):
+    """Muestra los gastos asociados y permite confirmar la rendición."""
+
+    rendicion = Rendicion.objects.get(id=rendicion_id)
+    gastos = Gasto.objects.filter(rendicion=rendicion)
+
+    if request.method == 'POST':
+        if rendicion.estado == Rendicion.ESTADO_INGRESADA:
+            rendicion.estado = Rendicion.ESTADO_PENDIENTE
+            rendicion.save()
+        return redirect('rendiciones_ingresadas')
+
+    total = sum(gasto.monto for gasto in gastos)
+    return render(
+        request,
+        'MainApp/detalle_rendicion.html',
+        {
+            'rendicion': rendicion,
+            'gastos': gastos,
+            'total': total,
+        },
+    )
+
 # Vista para mostrar solo las rendiciones aprobadas
 def aprobadas(request):
-    rendiciones_aprobadas = Rendicion.objects.filter(estado='Aprobado').order_by('id')  # Solo aprobadas en orden ascendente
+    rendiciones_aprobadas = Rendicion.objects.filter(
+        estado=Rendicion.ESTADO_APROBADO
+    ).order_by('id')
     return render(request, 'MainApp/aprobadas.html', {'rendiciones': rendiciones_aprobadas})
 
 # Vista para gestionar reembolsos
@@ -113,16 +156,18 @@ def gestion_reembolsos(request):
         # Buscar la rendición y actualizar su estado
         rendicion = Rendicion.objects.get(id=rendicion_id)
         if accion == 'aprobar':
-            rendicion.estado = 'Aprobado'
+            rendicion.estado = Rendicion.ESTADO_APROBADO
         elif accion == 'rechazar':
-            rendicion.estado = 'Rechazado'
+            rendicion.estado = Rendicion.ESTADO_RECHAZADO
         rendicion.save()
 
         # Redirigir a la misma página para reflejar los cambios
         return redirect('gestion_reembolsos')
 
     # Obtener todas las rendiciones pendientes
-    rendiciones_pendientes = Rendicion.objects.filter(estado='Pendiente')
+    rendiciones_pendientes = Rendicion.objects.filter(
+        estado=Rendicion.ESTADO_PENDIENTE
+    )
 
     # Asegurarse de que todas las rendiciones tengan su total correctamente calculado
     for rendicion in rendiciones_pendientes:
@@ -163,8 +208,25 @@ def visualizador(request):
     return render(request, 'MainApp/visualizador.html')
 
 # Vista de estadísticas
+
 def estadisticas(request):
-    return render(request, 'MainApp/estadisticas.html')
+    """Muestra un resumen de las rendiciones junto con un grafico."""
+    conteo_estados = (
+        Rendicion.objects.values('estado')
+        .annotate(total=Count('estado'))
+        .order_by('estado')
+    )
+
+    labels = [c['estado'] for c in conteo_estados]
+    data = [c['total'] for c in conteo_estados]
+
+    context = {
+        'labels': labels,
+        'data': data,
+        'conteo_estados': conteo_estados,
+        'total_rendiciones': sum(data),
+    }
+    return render(request, 'MainApp/estadisticas.html', context)
 
 # Vista para generar informe
 def generar_informe(request):
